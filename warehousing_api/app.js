@@ -23,6 +23,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 3000;
 const programmingLanguagesRouter = require('./routes/programmingLanguages');
+const category = require('./routes/category');
 
 app.use(bodyParser.json());
 app.use(
@@ -36,6 +37,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/programming-languages', programmingLanguagesRouter);
+app.use('/cate-list', category);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
