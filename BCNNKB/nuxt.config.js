@@ -1,5 +1,7 @@
 module.exports = {
   mode: 'spa',
+  // options...
+
   /*
    ** Headers of the page
    */
@@ -52,20 +54,41 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+
+    '@nuxtjs/proxy',
+
   ],
+  // proxy: {
+  //   '/api': {
+  //     target: 'http://localhost:3001',
+  //     pathRewrite: {
+  //       '^/api': '/api'
+  //     }
+  //   },
+  // },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxy: true,
+    baseURL: 'http://localhost:3001',
+    proxyHeaders: false,
+    credentials: false
+  },
   /*
    ** Build configuration
    */
+
   build: {
     /*
      ** You can extend webpack config here
      */
+    vendor: ['axios']
     // extend(config, ctx) {}
-  }
+  },
+  proxy: [
+    ['/app', { target: 'http://localhost:3001/' }]
+  ]
 }

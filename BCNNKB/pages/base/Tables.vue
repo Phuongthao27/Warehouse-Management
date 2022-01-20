@@ -6,10 +6,10 @@
           <template #header>
             <CIcon name="cil-grid"/> Simple Table
             <div class="card-header-actions">
-              <a 
-                href="https://coreui.io/vue/docs/components/nav" 
-                class="card-header-action" 
-                rel="noreferrer noopener" 
+              <a
+                href="https://coreui.io/vue/docs/components/nav"
+                class="card-header-action"
+                rel="noreferrer noopener"
                 target="_blank"
               >
                 <small class="text-muted">docs</small>
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import CTableWrapper from './Table.vue'
+import CTableWrapper from './CategoryUpdate.vue'
 import usersData from '../users/UsersData'
 
 export default {

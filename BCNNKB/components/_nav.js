@@ -40,7 +40,7 @@ export default [
         items: [
           {
             name: 'Loại hàng',
-            to: '/base/ProductionList'
+            to: '/base/CategoryList'
           },
           {
             name: 'Đơn vị tính',

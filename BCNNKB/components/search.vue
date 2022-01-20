@@ -1,20 +1,23 @@
 <template>
   <v-container>
-    <v-autocomplete
-      v-model="value"
-      :items="items"
-      dense
-      filled
-      label="Filled"
-    ></v-autocomplete>
+    <v-spacer></v-spacer>
+    <v-text-field
+      append-icon="search"
+      label="Search"
+      single-line
+      hide-details
+      v-model="search"
+    ></v-text-field>
     </v-container>
 </template>
 <script>
 export default {
-  data: () => ({
-    items: ['foo', 'bar', 'fizz', 'buzz'],
-    values: ['foo', 'bar'],
-    value: null,
-  }),
+  data () {
+    return {
+      search : ''
+    }
+
+  }
+
 }
 </script>
