@@ -41,10 +41,20 @@
             :items="items"
             :search="search"
           >
-            <template v-slot:item.action="{ item }">
-              <v-icon small class="mr-2" @click="updateCate(item.id)">edit</v-icon>
-              <v-icon small @click="deleteCate(item.id)">delete</v-icon>
+            <template v-slot:item.create_date="{ item }">
+              <span>{{new Date(item.create_date).toLocaleDateString()}}</span>
             </template>
+            <template v-slot:item.create_update="{ item }">
+              <span>{{new Date(item.create_update).toLocaleDateString()}}</span>
+            </template>
+            <template v-slot:item.action="{ item }">
+<!--              <v-icon small class="mr-2" @click="updateCate(item.id)">edit</v-icon>-->
+              <a href="javascript:;" v-on:click=" updateCate(item.id)">Edit </a>
+<!--              <v-icon small @click="deleteCate(item.id)">delete</v-icon>-->
+              <a href="javascript:;" v-on:click=" deleteCate(item.id)">Delete</a>
+            </template>
+
+
             <v-alert slot="no-results" :value="true" color="error" icon="warning">
               Your search for "{{ search }}" found no results.
             </v-alert>
@@ -70,7 +80,9 @@ export default {
         { text: 'Update date', value: 'create_update' },
         { text: 'Action', value: 'action', sortable: false }
       ],
-      items: []
+      items: [],
+      dialog: false,
+      search:"",
     }
   },
   created() {
@@ -97,20 +109,21 @@ export default {
     },
    async deleteCate(cateId){
       console.log(cateId)
-     await this.$axios.delete('http://localhost:3001/products/'+cateId)
-        .catch((err)=>{
-        console.log(err)
-      });
-      this.getListCate()
-     await console.log("done")
+     if(confirm("Do you really want to delete?")){
+
+       await this.$axios.delete('http://localhost:3001/products/'+cateId)
+         .catch(error => {
+           console.log(error);
+         })
+       this.getListCate()
+       await console.log("done")
+     }
+
     },
-    updateCate(cateId){
+    async  updateCate(cateId){
        this.$router.push({path:'/base/CategoryUpdate', query: {id: cateId}});
       console.log(cateId)
-      this.$axios.put('http://localhost:3001/products/')
-        .catch((err)=>{
-          console.log(err)
-        });
+
 
     }
 
@@ -120,7 +133,6 @@ export default {
 
 }
 </script>
-
 <style>
   .breadcrumb-item + .font-xl.breadcrumb-item::before {
     color: rgb(140, 195, 38);

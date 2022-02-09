@@ -51,7 +51,7 @@ export default {
   }),
   methods:{
     backToList(){
-      this.$router.push({path:'/base/CategoryList'});
+      this.$router.push({path:'/base/ReceiptList'});
     },
     addCate(){
       this.$axios.post('http://localhost:3001/products',{
@@ -75,6 +75,6 @@ export default {
   margin-left: -400px;
 }
 .btn{
-color: blue;
+  color: blue;
 }
 </style>

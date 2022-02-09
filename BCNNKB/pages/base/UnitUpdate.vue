@@ -2,13 +2,12 @@
   <CCard>
     <CCardHeader>
       <slot name="header">
-        <CIcon name="cil-justify-center"/><strong>Category update </strong>
+        <CIcon name="cil-justify-center"/><strong>Units update </strong>
       </slot>
     </CCardHeader>
     <CCardBody>
-      <v-text-field :rules="rules" v-model="cateName" label="Category name"></v-text-field>
-      <v-text-field label="Create date" v-model="createDate"></v-text-field>
-      <v-text-field label="Update date" v-model="updateDate"></v-text-field>
+      <v-text-field :rules="rules" v-model="unitName" label="Unit name"></v-text-field>
+
       <div style="float:right">
 
         <v-btn
@@ -36,10 +35,8 @@
 export default {
   name: 'Table',
   data: () => ({
-    cateId:"",
-    cateName:"",
-    createDate:"",
-    updateDate:"",
+    unitId:"",
+    unitName:"",
     rules: [
 
       value => !!value || '*',
@@ -47,11 +44,11 @@ export default {
     ],
   }),
   mounted() {
-    this.getListCate()
+    this.getListUnit()
   },
   methods: {
     backToList() {
-      this.$router.push({path: '/base/CategoryList'});
+      this.$router.push({path: '/base/UnitList'});
       let id = this.$route.query.id
       console.log("id cate" + id)
     },
@@ -70,18 +67,16 @@ export default {
         });
     },
 
-    getListCate(){
+    getListUnit(){
       let id = this.$route.query.id
       this.$axios
-        .get('http://localhost:3001/products/'+id)
+        .get('http://localhost:3001/units/'+id)
         .then((response) =>{
-          this.cateId = response.data.id
-          this.cateName = response.data.category_name
-          this.createDate = new Date(response.data.create_date).toLocaleDateString()
-          this.updateDate = new Date(response.data.create_update).toLocaleDateString()
+          this.unitId = response.data.unit_id
+          this.unitName = response.data.unit_name
           console.log(response.data)
         }).catch((err)=>{
-          console.log(err)
+        console.log(err)
       });
     },
 
@@ -95,6 +90,6 @@ export default {
   margin-left: -400px;
 }
 .btn{
-color: blue;
+  color: blue;
 }
 </style>

@@ -2,19 +2,17 @@
   <CCard>
     <CCardHeader>
       <slot name="header">
-        <CIcon name="cil-justify-center"/><strong>Category Add </strong>
+        <CIcon name="cil-justify-center"/><strong>Unit Add </strong>
       </slot>
     </CCardHeader>
     <CCardBody>
       <v-text-field
-        label="Category Id"
+        label="Supplier Id"
         :rules="rules"
-        v-model="cateId"
+        v-model="id"
         hide-details="auto"
       ></v-text-field>
-      <v-text-field :rules="rules" v-model="cateName" label="Category name"></v-text-field>
-      <v-text-field :rules="rules" v-model="createDate" label="Create date"></v-text-field>
-      <v-text-field :rules="rules" v-model="updateDate" label="Update date"></v-text-field>
+      <v-text-field :rules="rules" v-model="supplierName" label="Supplier name"></v-text-field>
       <div style="float:right">
         <v-btn
           color="blue"
@@ -35,15 +33,12 @@
 </template>
 
 <script>
-import moment from "moment";
 
 export default {
   name: 'Table',
   data: () => ({
-    cateId:"",
-    cateName:"",
-    createDate:moment().format('YYYY-MM-DD'),
-    updateDate:moment().format('YYYY-MM-DD'),
+    id :"",
+    supplierName :"",
     rules: [
       value => !!value || '*',
       value => (value && value.length >= 3) || 'Min 3 characters',
@@ -51,14 +46,12 @@ export default {
   }),
   methods:{
     backToList(){
-      this.$router.push({path:'/base/CategoryList'});
+      this.$router.push({path:'/base/SupplierList'});
     },
     addCate(){
-      this.$axios.post('http://localhost:3001/products',{
-        id : this.id,
-        category_name : this.cateName,
-        create_date : this.createDate,
-        create_update : this.updateDate
+      this.$axios.post('http://localhost:3001/supplier',{
+        supplier_id : this.id,
+        supplier_name : this.supplierName,
       }).then(resp =>{
         console.log(resp)
         alert("Thêm mới loại hàng thành công!");
@@ -75,6 +68,6 @@ export default {
   margin-left: -400px;
 }
 .btn{
-color: blue;
+  color: blue;
 }
 </style>

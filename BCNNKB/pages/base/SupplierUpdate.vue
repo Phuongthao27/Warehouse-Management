@@ -2,13 +2,12 @@
   <CCard>
     <CCardHeader>
       <slot name="header">
-        <CIcon name="cil-justify-center"/><strong>Category update </strong>
+        <CIcon name="cil-justify-center"/><strong>Supplier update </strong>
       </slot>
     </CCardHeader>
     <CCardBody>
-      <v-text-field :rules="rules" v-model="cateName" label="Category name"></v-text-field>
-      <v-text-field label="Create date" v-model="createDate"></v-text-field>
-      <v-text-field label="Update date" v-model="updateDate"></v-text-field>
+      <v-text-field :rules="rules" v-model="supplierName" label="Supplier name"></v-text-field>
+
       <div style="float:right">
 
         <v-btn
@@ -36,10 +35,8 @@
 export default {
   name: 'Table',
   data: () => ({
-    cateId:"",
-    cateName:"",
-    createDate:"",
-    updateDate:"",
+    id:"",
+    supplierName:"",
     rules: [
 
       value => !!value || '*',
@@ -47,20 +44,18 @@ export default {
     ],
   }),
   mounted() {
-    this.getListCate()
+    this.getListUnit()
   },
   methods: {
     backToList() {
-      this.$router.push({path: '/base/CategoryList'});
+      this.$router.push({path: '/base/SupplierList'});
       let id = this.$route.query.id
       console.log("id cate" + id)
     },
     updateCate() {
       let id = this.$route.query.id
-      this.$axios.put('http://localhost:3001/products/' + id,{
-        category_name : this.cateName,
-        create_date : this.createDate,
-        create_update : this.updateDate
+      this.$axios.put('http://localhost:3001/supplier/' + id,{
+        supplier_name : this.supplierName,
       }).then(resp =>{
         console.log(resp)
         alert("Cập nhật thành công!");
@@ -70,18 +65,16 @@ export default {
         });
     },
 
-    getListCate(){
+    getListUnit(){
       let id = this.$route.query.id
+      console.log(id)
       this.$axios
-        .get('http://localhost:3001/products/'+id)
+        .get('http://localhost:3001/supplier/'+id)
         .then((response) =>{
-          this.cateId = response.data.id
-          this.cateName = response.data.category_name
-          this.createDate = new Date(response.data.create_date).toLocaleDateString()
-          this.updateDate = new Date(response.data.create_update).toLocaleDateString()
+          this.supplierName = response.data.supplier_name
           console.log(response.data)
         }).catch((err)=>{
-          console.log(err)
+        console.log(err)
       });
     },
 
@@ -95,6 +88,6 @@ export default {
   margin-left: -400px;
 }
 .btn{
-color: blue;
+  color: blue;
 }
 </style>

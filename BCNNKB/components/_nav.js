@@ -44,18 +44,18 @@ export default [
           },
           {
             name: 'Đơn vị tính',
-            to: '/base/cards'
+            to: '/base/UnitList'
           },
           {
             name: 'Sản phẩm',
-            to: '/base/cards'
+            to: '/base/ProductsList'
           }
         ]
       },
       {
         _name: 'CSidebarNavItem',
         name: 'Nhà cung cấp',
-        to: '/theme/typography',
+        to: '/base/SupplierList',
         icon: 'cil-pencil'
       },
 
@@ -71,7 +71,7 @@ export default [
         items: [
           {
             name: 'Nhập hàng',
-            to: '/base/breadcrumbs'
+            to: '/base/ReceiptList'
           },
           {
             name: 'Sản phẩm đã nhập',
