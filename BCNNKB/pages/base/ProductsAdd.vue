@@ -1,4 +1,5 @@
 <template>
+  <v-container fluid>
   <CCard>
     <CCardHeader>
       <slot name="header">
@@ -63,6 +64,7 @@
 
     </CCardBody>
   </CCard>
+  </v-container>
 </template>
 
 <script>

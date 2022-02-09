@@ -2,19 +2,79 @@
   <CCard>
     <CCardHeader>
       <slot name="header">
-        <CIcon name="cil-justify-center"/><strong>Category Add </strong>
+        <CIcon name="cil-justify-center"/><strong>Tạo mới phiếu nhập </strong>
       </slot>
     </CCardHeader>
     <CCardBody>
       <v-text-field
-        label="Category Id"
+        label="Mã phiếu nhập"
         :rules="rules"
         v-model="cateId"
         hide-details="auto"
       ></v-text-field>
-      <v-text-field :rules="rules" v-model="cateName" label="Category name"></v-text-field>
-      <v-text-field :rules="rules" v-model="createDate" label="Create date"></v-text-field>
-      <v-text-field :rules="rules" v-model="updateDate" label="Update date"></v-text-field>
+      <v-text-field :rules="rules" v-model="cateName" label="Nội dung nhập hàng"></v-text-field>
+      <v-text-field :rules="rules" v-model="cateName" label="Người tạo"></v-text-field>
+      <v-textarea
+        solo
+        name="input-7-4"
+        value=""
+        label="Ghi chú"
+      ></v-textarea>
+      <v-text-field :rules="rules" v-model="updateDate" label="Ngày nhập"></v-text-field>
+      <p>Dữ liệu nhập hàng :</p>
+      <v-btn  style="float:right;margin-bottom: 50px;background-color:#7bd0f7" @click="addMoreProduct">Thêm</v-btn>
+      <v-container>
+
+        <table class="table table-bordered">
+          <thead>
+          <tr
+          >
+            <th scope="col">STT</th>
+            <th scope="col">Sản phẩm</th>
+            <th scope="col">Nhà cung cấp</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Đơn giá</th>
+            <th scope="col">Ngày sản xuất</th>
+            <th scope="col">Ngày hết hạn</th>
+            <th scope="col">Tổng tiền</th>
+            <th scope="col">Thao tác</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr
+            v-for="n in totalProducts"
+            :key="n"
+            >
+            <th scope="row">{{n}}</th>
+            <td>
+              <select class="form-control" name="cate" v-model="cate">
+                <option v-for="item in items" v-bind:key="item.id" v-bind:value="item">
+                  {{ item.category_name }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" name="cate" v-model="cate">
+                <option v-for="item in items" v-bind:key="item.id" v-bind:value="item">
+                  {{ item.category_name }}
+                </option>
+              </select>
+            </td>
+            <td>@mdo</td>
+            <td>Mark</td>
+            <td><input type="date" id="NXS" name="NXS"></td>
+            <td><input type="date" id="HSD" name="HSD"></td>
+            <td>@mdo</td>
+            <td>
+              <v-btn
+              @click="removeElement(n)"
+              >Delete</v-btn>
+            </td>
+          </tr>
+
+          </tbody>
+        </table>
+      </v-container>
       <div style="float:right">
         <v-btn
           color="blue"
@@ -40,6 +100,8 @@ import moment from "moment";
 export default {
   name: 'Table',
   data: () => ({
+    items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+    totalProducts:"1",
     cateId:"",
     cateName:"",
     createDate:moment().format('YYYY-MM-DD'),
@@ -52,6 +114,12 @@ export default {
   methods:{
     backToList(){
       this.$router.push({path:'/base/ReceiptList'});
+    },
+    addMoreProduct(){
+      this.totalProducts ++;
+    },
+    removeElement: function (index) {
+      document.getElementsByTagName("tr")[index].remove()
     },
     addCate(){
       this.$axios.post('http://localhost:3001/products',{
