@@ -2,18 +2,18 @@
   <CCard>
     <CCardHeader>
       <slot name="header">
-        <CIcon name="cil-justify-center"/><strong>Tạo mới phiếu nhập </strong>
+        <CIcon name="cil-justify-center"/><strong>Tạo mới phiếu xuất </strong>
       </slot>
     </CCardHeader>
     <CCardBody>
       {{product.name}}
       <v-text-field
-        label="Mã phiếu nhập"
+        label="Mã phiếu xuất"
         :rules="rules"
         v-model="order_id"
         hide-details="auto"
       ></v-text-field>
-      <v-text-field :rules="rules" v-model="content" label="Nội dung nhập hàng"></v-text-field>
+      <v-text-field :rules="rules" v-model="content" label="Nội dung xuất hàng"></v-text-field>
       <v-text-field :rules="rules" v-model="creater" label="Người tạo"></v-text-field>
       <v-textarea
         solo
@@ -21,8 +21,8 @@
         v-model="description"
         label="Ghi chú"
       ></v-textarea>
-      <v-text-field :rules="rules" v-model="createDate" label="Ngày nhập"></v-text-field>
-      <p>Dữ liệu nhập hàng :</p>
+      <v-text-field :rules="rules" v-model="createDate" label="Ngày xuất"></v-text-field>
+      <p>Dữ liệu xuất hàng :</p>
       <v-btn  style="float:right;margin-bottom: 50px;background-color:#7bd0f7" :disabled="isActive" @click="addMoreProduct">Thêm</v-btn>
       <v-container>
 
@@ -45,7 +45,7 @@
           <tr
             v-for="n in totalProducts"
             :key="n"
-            >
+          >
             <th scope="row">{{n}}</th>
             <td>
               <select class="form-control" name="product" v-model="product[n]">
@@ -74,7 +74,7 @@
             <td><input type="date"  name="HSD" v-model="expiration_date[n]"></td>
             <td>
               <v-btn
-              @click="removeElement(n)"
+                @click="removeElement(n)"
               >Delete</v-btn>
             </td>
           </tr>
@@ -184,7 +184,7 @@ export default {
 
     addMoreProduct(){
       if(this.validate()) {
-        this.$axios.post('http://localhost:3001/receipt/detail', {
+        this.$axios.post('http://localhost:3001/export/detail', {
           product_name: this.product[1].name,
           suppplier: this.supplier[1].supplier_name,
           price: this.price[1],
@@ -192,7 +192,7 @@ export default {
           production_date: this.production_date[1],
           expiration_date: this.expiration_date[1],
           total_price: this.price[1] * this.quantity[1],
-          receipt_id: this.order_id,
+          export_id: this.order_id,
           quantity : this.quantity[1],
         }).then((response) => {
             if (response.data) {
@@ -213,8 +213,8 @@ export default {
       document.getElementsByTagName("tr")[index].remove()
     },
     addReciept_(){
-      this.$axios.post('http://localhost:3001/receipt',{
-        order_id : this.order_id,
+      this.$axios.post('http://localhost:3001/export',{
+        id : this.order_id,
         content : this.content,
         creater : this.creater,
         description : this.description,
@@ -223,27 +223,27 @@ export default {
         .catch((err) => {
           console.log(err)
         });
-        this.$axios.post('http://localhost:3001/receipt/detail',{
-          product_name: this.product[1].name,
-          suppplier: this.supplier[1].supplier_name,
-          price: this.price[1],
-          unit: this.unit[1].unit_name,
-          production_date: this.production_date[1],
-          expiration_date: this.expiration_date[1],
-          total_price: this.price[1] * this.quantity[1],
-          receipt_id: this.order_id,
-          quantity : this.quantity[1],
-        }).then((response) =>{
-         if(response.data){
-           alert("Thêm mới thành công!")
-         }
+      this.$axios.post('http://localhost:3001/export/detail',{
+        product_name: this.product[1].name,
+        suppplier: this.supplier[1].supplier_name,
+        price: this.price[1],
+        unit: this.unit[1].unit_name,
+        production_date: this.production_date[1],
+        expiration_date: this.expiration_date[1],
+        total_price: this.price[1] * this.quantity[1],
+        export_id: this.order_id,
+        quantity : this.quantity[1],
+      }).then((response) =>{
+          if(response.data){
+            alert("Thêm mới thành công!")
+          }
         }
 
-        )
-          .catch((err) => {
-            console.log(err)
-            alert("Đã xảy ra lỗi")
-          });
+      )
+        .catch((err) => {
+          console.log(err)
+          alert("Đã xảy ra lỗi")
+        });
 
 
 

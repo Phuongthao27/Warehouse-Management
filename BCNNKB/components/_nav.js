@@ -75,7 +75,7 @@ export default [
           },
           {
             name: 'Sản phẩm đã nhập',
-            to: '/base/cards'
+            to: '/base/ProductImportList'
           },
 
         ]
@@ -83,16 +83,16 @@ export default [
       {
         _name: 'CSidebarNavDropdown',
         name: 'Dữ liệu xuất hàng',
-        route: '/notifications',
+        route: '/base',
         icon: 'cil-bell',
         items: [
           {
             name: 'Xuất Hàng',
-            to: '/notifications/alerts'
+            to: '/base/ExportSlipList'
           },
           {
             name: 'Sản phẩm đã xuất',
-            to: '/notifications/badges'
+            to: '/base/ProductExportList'
           },
         ]
       },

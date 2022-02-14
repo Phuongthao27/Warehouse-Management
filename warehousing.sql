@@ -11,48 +11,11 @@
  Target Server Version : 50735
  File Encoding         : 65001
 
- Date: 16/01/2022 11:32:02
+ Date: 15/02/2022 05:53:56
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for programming_languages
--- ----------------------------
-DROP TABLE IF EXISTS `programming_languages`;
-CREATE TABLE `programming_languages`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `released_year` int(11) NOT NULL,
-  `githut_rank` int(11) NULL DEFAULT NULL,
-  `pypl_rank` int(11) NULL DEFAULT NULL,
-  `tiobe_rank` int(11) NULL DEFAULT NULL,
-  `created_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
-  `updated_at` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `idx_name_unique`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of programming_languages
--- ----------------------------
-INSERT INTO `programming_languages` VALUES (1, 'JavaScript', 1995, 1, 3, 7, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (2, 'Python', 1991, 2, 1, 3, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (3, 'Java', 1995, 3, 2, 2, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (4, 'TypeScript', 2012, 7, 10, 42, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (5, 'C#', 2000, 9, 4, 5, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (6, 'PHP', 1995, 8, 6, 8, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (7, 'C++', 1985, 5, 5, 4, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (8, 'C', 1972, 10, 5, 1, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (9, 'Ruby', 1995, 6, 15, 15, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (10, 'R', 1993, 33, 7, 9, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (11, 'Objective-C', 1984, 18, 8, 18, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (12, 'Swift', 2015, 16, 9, 13, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (13, 'Kotlin', 2011, 15, 12, 40, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (14, 'Go', 2009, 4, 13, 14, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (15, 'Rust', 2010, 14, 16, 26, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
-INSERT INTO `programming_languages` VALUES (16, 'Scala', 2004, 11, 17, 34, '2022-01-15 16:40:43', '2022-01-15 16:40:43');
 
 -- ----------------------------
 -- Table structure for tbl_category
@@ -61,52 +24,62 @@ DROP TABLE IF EXISTS `tbl_category`;
 CREATE TABLE `tbl_category`  (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `create_date` datetime(0) NULL DEFAULT NULL,
-  `create_update` datetime(0) NULL DEFAULT NULL,
+  `create_date` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `create_update` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_category
 -- ----------------------------
-INSERT INTO `tbl_category` VALUES (1, 'đồ gia dụng', NULL, NULL);
+BEGIN;
+INSERT INTO `tbl_category` VALUES (1, 'Dầu ăn', '3/22/2022', '2/28/2022'), (7, 'Bột ngọt', '2/22/2022', '2/22/2022'), (8, 'Mì ba miền', '6/8/2022', '6/8/2022'), (11, 'sdsad', '2022-02-09', '2022-02-09'), (12, 'sdsad', '2022-02-09', '2022-02-09'), (13, 'cmm', '2022-02-09', '2022-02-09');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for tbl_export_slip
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_export_slip`;
 CREATE TABLE `tbl_export_slip`  (
-  `id` int(11) NOT NULL,
+  `id` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `creater` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `createDate` datetime(0) NULL DEFAULT NULL,
+  `create_date` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_export_slip
 -- ----------------------------
+BEGIN;
+INSERT INTO `tbl_export_slip` VALUES ('Th01', 'sa', 'sad', 'sad', '2022-02-15');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for tbl_export_slip_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_export_slip_detail`;
 CREATE TABLE `tbl_export_slip_detail`  (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `supplier_id` int(11) NOT NULL,
-  `rice` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `unit_id` int(11) NULL DEFAULT NULL,
-  `production-date` int(11) NULL DEFAULT NULL,
-  `expiration_date` datetime(0) NULL DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `suppplier` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `price` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `unit` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `production_date` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `expiration_date` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `total_price` float NULL DEFAULT NULL,
+  `export_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `quantity` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_export_slip_detail
 -- ----------------------------
+BEGIN;
+INSERT INTO `tbl_export_slip_detail` VALUES (7, 'Mì ăn liền hảo hảo', 'Hanayki', '25000', 'Hộp', '2022-02-22', '2022-02-25', 150000, 'Th01', 6);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for tbl_product
@@ -124,48 +97,59 @@ CREATE TABLE `tbl_product`  (
   `quantily` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `state` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`product_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_product
 -- ----------------------------
+BEGIN;
+INSERT INTO `tbl_product` VALUES (1, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL), (2, 'Mì ăn liền hảo hảo', 'Thảonp', NULL, 3000, 3000, 8, 4, '2', '1'), (3, 'tên là thảo', 'sdf', 6000, 69000, 369996, 7, 3, '0', '1');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for tbl_receipt
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_receipt`;
 CREATE TABLE `tbl_receipt`  (
-  `order_id` int(11) NOT NULL,
+  `order_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `creater` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
-  `create date` datetime(0) NULL DEFAULT NULL,
+  `create_date` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`order_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_receipt
 -- ----------------------------
+BEGIN;
+INSERT INTO `tbl_receipt` VALUES ('h123', 'dsds', 'Thảo', 'hhhhsadsa', '2022-02-14'), ('xzc', 'cxz', 'cxz', 'cxz', '2022-02-13');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for tbl_reciept_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `tbl_reciept_detail`;
 CREATE TABLE `tbl_reciept_detail`  (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `suppplier_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `suppplier` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `price` float NULL DEFAULT NULL,
-  `unit_id` int(11) NOT NULL,
-  `production-date` datetime(0) NULL DEFAULT NULL,
-  `expiration_date` datetime(0) NULL DEFAULT NULL,
+  `unit` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `production_date` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `expiration_date` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `total_price` float NOT NULL,
+  `receipt_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `quantity` int(50) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_reciept_detail
 -- ----------------------------
+BEGIN;
+INSERT INTO `tbl_reciept_detail` VALUES (28, 'Mì ăn liền hảo hảo', 'Hanayki', 10000, 'Hộp', '2022-01-31', '2022-03-02', 30000, 'xzc', 3), (29, 'Mì ăn liền hảo hảo', 'Hanayki', 10000, 'Hộp', '2022-01-31', '2022-03-02', 30000, 'xzc', 3), (31, 'tên là thảo', 'Tosiba', 4000, 'Gói', '2022-02-20', '2022-03-11', 12000, 'h123', 3);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for tbl_supplier
@@ -175,11 +159,14 @@ CREATE TABLE `tbl_supplier`  (
   `supplier_id` int(11) UNSIGNED NOT NULL,
   `supplier_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`supplier_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_supplier
 -- ----------------------------
+BEGIN;
+INSERT INTO `tbl_supplier` VALUES (2, 'Tosiba'), (3, 'Hanayki');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for tbl_unit
@@ -189,11 +176,14 @@ CREATE TABLE `tbl_unit`  (
   `unit_id` int(11) NOT NULL AUTO_INCREMENT,
   `unit_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`unit_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_unit
 -- ----------------------------
+BEGIN;
+INSERT INTO `tbl_unit` VALUES (1, 'Gói'), (3, 'Hộp'), (4, 'Thùng');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for tbl_warehouse_data
@@ -205,10 +195,12 @@ CREATE TABLE `tbl_warehouse_data`  (
   `unit_id` int(11) NOT NULL,
   `quantity` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`product__id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tbl_warehouse_data
 -- ----------------------------
+BEGIN;
+COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

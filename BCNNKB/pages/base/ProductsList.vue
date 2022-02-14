@@ -41,9 +41,6 @@
             :items="items"
             :search="search"
           >
-
-
-
             <template v-slot:item.action="{ item }">
               <!--              <v-icon small class="mr-2" @click="updateCate(item.id)">edit</v-icon>-->
               <a href="javascript:;" v-on:click=" update(item.product_id)">Edit </a>

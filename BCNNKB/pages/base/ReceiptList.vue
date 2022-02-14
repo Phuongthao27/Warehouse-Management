@@ -63,6 +63,7 @@
                   <v-btn
                     v-bind="attrs"
                     v-on="on"
+                    @click="showDetail(item.order_id)"
                   > Detail</v-btn>
                 </template>
                 <template v-slot:default="dialog">
@@ -73,19 +74,23 @@
                     ><h3>Chi tiết phiếu nhập</h3></v-toolbar>
                     <v-card-text>
                       <div class="text pa-12" >
-                        <h3 style="text-align: center">Chi tiết phiếu nhập hàng ...</h3>
-                        <p>Mã đơn hàng</p>
-                        <p>Người nhập</p>
-                        <p>Nội dung nhập hàng</p>
-                        <p>Ghi chú</p>
-                        <p>Ngày tạo</p>
-                        <p>Tổng giá trị nhập hàng</p>
+                        <h3 style="text-align: center">Chi tiết phiếu nhập hàng {{item.order_id}}</h3>
+                        <p><b>Mã đơn hàng  : {{item.order_id}}</b></p>
+                        <p><b>Người nhập  : {{item.creater}}</b></p>
+                        <p><b>Nội dung nhập hàng  : {{item.content}}</b></p>
+                        <p><b>Ghi chú  : {{item.description}}</b></p>
+                        <p><b>Ngày tạo  : {{item.create_date}}</b></p>
+                        <p><b>Tổng giá trị nhập hàng</b></p>
 
                         <v-data-table
-                          :headers="headers"
-                          :items="items"
+                          :headers="headers_detail"
+                          :items="items_detail"
                           :search="search"
-                        ></v-data-table>
+                        >
+                          <template v-slot:item.create_date="{ item }">
+                            <span>{{new Date(item.create_date).toLocaleDateString()}}</span>
+                          </template>
+                        </v-data-table>
 
                       </div>
                     </v-card-text>
@@ -104,7 +109,7 @@
               <!--<v-icon small class="mr-2" @click="updateCate(item.id)">edit</v-icon>-->
               <v-btn><a href="javascript:;" v-on:click=" updateCate(item.id)">Edit </a></v-btn>
               <!--              <v-icon small @click="deleteCate(item.id)">delete</v-icon>-->
-              <v-btn> <a href="javascript:;" v-on:click=" deleteCate(item.id)">Delete</a></v-btn>
+              <v-btn> <a href="javascript:;" v-on:click=" deleteCate(item.order_id)">Delete</a></v-btn>
 
             </template>
 
@@ -128,24 +133,37 @@ export default {
   components: {},
   data () {
     return {
+      headers_detail :[
+        { text: 'Mã sản phẩm', value: 'product_name' },
+        { text: 'Nhà cung cấp', value: 'supplier' },
+        { text: 'Giá nhập', value: 'price' },
+        { text: 'Đơn vị', value: 'unit' },
+        { text: 'Số lượng', value: 'quantity' },
+        { text: 'Ngày sản xuất', value: 'production_date' },
+        { text: 'Hạn sử dụng', value: 'expiration_date' },
+        { text: 'Tổng giá', value: 'total_price' },
+
+      ],
       headers: [
-        { text: 'ID', value: 'id' },
-        { text: 'Category name', value: 'category_name' },
-        { text: 'Create date', value: 'create_date' },
-        { text: 'Update date', value: 'create_update' },
+        { text: 'ID', value: 'order_id' },
+        { text: 'Nội dung nhập hàng', value: 'content' },
+        { text: 'Người tạo', value: 'creater' },
+        { text: 'Mô tả', value: 'description' },
+        { text: 'Ngày tạo', value: 'create_date' },
         { text: 'Action', value: 'action', sortable: false }
       ],
       items: [],
       dialog: false,
       search:"",
       showModalError:false,
-
+      items_detail: [],
+      receiptId:"",
     }
   },
   created() {
     this.getListCate()
     this.$axios
-      .get('http://localhost:3001/products',)
+      .get('http://localhost:3001/receipt',)
       .then((response) =>{
         this.items = response.data
         console.log(response.data)
@@ -157,18 +175,30 @@ export default {
     categoryAdd(){
       this.$router.push({path:'/base/RecieptAdd'});
     },
+    showDetail(id){
+      this.$axios
+        .get('http://localhost:3001/receipt/detail/'+id)
+        .then((response) =>{
+          this.items_detail = response.data
+        });
+    },
     getListCate () {
       this.$axios
-        .get('http://localhost:3001/products',)
+        .get('http://localhost:3001/receipt',)
         .then((response) =>{
           this.items = response.data
         });
     },
-    async deleteCate(cateId){
-      console.log(cateId)
+    async deleteCate(Id){
+      console.log(Id)
       if(confirm("Do you really want to delete?")){
 
-        await this.$axios.delete('http://localhost:3001/products/'+cateId)
+        await this.$axios.delete('http://localhost:3001/receipt/'+Id)
+          .catch(error => {
+            console.log(error);
+          })
+
+        await this.$axios.delete('http://localhost:3001/receiptDetail/'+Id)
           .catch(error => {
             console.log(error);
           })
