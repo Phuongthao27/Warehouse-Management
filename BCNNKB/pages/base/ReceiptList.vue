@@ -210,8 +210,6 @@ export default {
     async  updateCate(cateId){
       this.$router.push({path:'/base/CategoryUpdate', query: {id: cateId}});
       console.log(cateId)
-
-
     }
 
   }

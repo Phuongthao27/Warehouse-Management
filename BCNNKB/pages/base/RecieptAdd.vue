@@ -184,26 +184,6 @@ export default {
 
     addMoreProduct(){
       if(this.validate()) {
-        this.$axios.post('http://localhost:3001/receipt/detail', {
-          product_name: this.product[1].name,
-          suppplier: this.supplier[1].supplier_name,
-          price: this.price[1],
-          unit: this.unit[1].unit_name,
-          production_date: this.production_date[1],
-          expiration_date: this.expiration_date[1],
-          total_price: this.price[1] * this.quantity[1],
-          receipt_id: this.order_id,
-          quantity : this.quantity[1],
-        }).then((response) => {
-            if (response.data) {
-              console.log("Thêm mới thành công!")
-            }
-          }
-        )
-          .catch((err) => {
-            console.log(err)
-            alert("Đã xảy ra lỗi")
-          });
         this.totalProducts++;
       }else {
         alert("mã phiếu nhập không được bỏ trống")
@@ -223,28 +203,29 @@ export default {
         .catch((err) => {
           console.log(err)
         });
-        this.$axios.post('http://localhost:3001/receipt/detail',{
-          product_name: this.product[1].name,
-          suppplier: this.supplier[1].supplier_name,
-          price: this.price[1],
-          unit: this.unit[1].unit_name,
-          production_date: this.production_date[1],
-          expiration_date: this.expiration_date[1],
-          total_price: this.price[1] * this.quantity[1],
+      console.log(this.product[2].name)
+      for (let i = 1; i <= this.totalProducts; i++) {
+        this.$axios.post('http://localhost:3001/receipt/detail', {
+          product_name: this.product[i].name,
+          suppplier: this.supplier[i].supplier_name,
+          price: this.price[i],
+          unit: this.unit[i].unit_name,
+          production_date: this.production_date[i],
+          expiration_date: this.expiration_date[i],
+          total_price: this.price[i] * this.quantity[i],
           receipt_id: this.order_id,
-          quantity : this.quantity[1],
-        }).then((response) =>{
-         if(response.data){
-           alert("Thêm mới thành công!")
-         }
-        }
-
+          quantity: this.quantity[i],
+        }).then((response) => {
+            if (response.data) {
+              alert("Thêm mới thành công!")
+            }
+          }
         )
           .catch((err) => {
             console.log(err)
             alert("Đã xảy ra lỗi")
           });
-
+      }
 
 
     },
