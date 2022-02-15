@@ -113,7 +113,7 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'Quản trị viên',
-        to: '/theme/typography',
+        to: '/base/Login',
         icon: 'cil-pencil'
       },
 
