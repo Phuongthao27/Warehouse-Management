@@ -206,16 +206,16 @@ export default {
           quantity: this.quantity[i],
         }).then((response) => {
             if (response.data) {
-              alert("Thêm mới thành công!")
+              console.log("Thêm mới thành công!")
             }
           }
         )
           .catch((err) => {
             console.log(err)
-            alert("Đã xảy ra lỗi")
+            console.log("Đã xảy ra lỗi")
           });
       }
-
+    alert("Thêm mới thành công")
 
     },
 

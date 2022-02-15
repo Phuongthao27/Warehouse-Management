@@ -42,10 +42,8 @@
             :search="search"
           >
             <template v-slot:item.action="{ item }">
-              <!--              <v-icon small class="mr-2" @click="updateCate(item.id)">edit</v-icon>-->
-              <a href="javascript:;" v-on:click=" update(item.product_id)">Edit </a>
               <!--              <v-icon small @click="deleteCate(item.id)">delete</v-icon>-->
-              <a href="javascript:;" v-on:click=" deleteSup(item.id)">Delete</a>
+              <a href="javascript:;" v-on:click=" deleteSup(item.product_id)">Delete</a>
             </template>
 
 
@@ -107,7 +105,7 @@ export default {
       console.log(Id)
       if(confirm("Do you really want to delete?")){
 
-        await this.$axios.delete('http://localhost:3001/supplier/'+Id)
+        await this.$axios.delete('http://localhost:3001/product/'+Id)
           .catch(error => {
             console.log(error);
           })

@@ -105,9 +105,6 @@
                   </template>
                 </v-dialog>
                 <!-- End dialog -->
-
-                <!--<v-icon small class="mr-2" @click="updateCate(item.id)">edit</v-icon>-->
-                <v-btn><a href="javascript:;" v-on:click=" updateCate(item.id)">Edit </a></v-btn>
                 <!--              <v-icon small @click="deleteCate(item.id)">delete</v-icon>-->
                 <v-btn> <a href="javascript:;" v-on:click=" deleteCate(item.id)">Delete</a></v-btn>
 

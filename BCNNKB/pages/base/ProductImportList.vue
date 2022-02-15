@@ -133,7 +133,6 @@ export default {
       headers: [
         { text: 'Tên sản phẩm', value: 'product_name' },
         { text: 'Nhà cung cấp', value: 'suppplier' },
-        { text: 'Đơn vị', value: 'unit' },
         { text: 'Tổng số lượng', value: 'tongsl' },
         { text: 'Tổng giá', value: 'tongprice' },
 
