@@ -19,13 +19,13 @@ export default [
       {
         _name: 'CSidebarNavItem',
         name: 'Thống kê xuất nhập kho',
-        to: '/theme/colors',
+        to: '/base/Report1',
         icon: 'cil-drop'
       },
       {
         _name: 'CSidebarNavItem',
         name: 'Thống kê doanh thu',
-        to: '/theme/typography',
+        to: '/base/Report2',
         icon: 'cil-pencil',
       },
       {

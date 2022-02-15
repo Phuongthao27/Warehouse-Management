@@ -137,7 +137,6 @@ export default {
         { text: 'Mã sản phẩm', value: 'product_name' },
         { text: 'Nhà cung cấp', value: 'supplier' },
         { text: 'Giá nhập', value: 'price' },
-        { text: 'Đơn vị', value: 'unit' },
         { text: 'Số lượng', value: 'quantity' },
         { text: 'Ngày sản xuất', value: 'production_date' },
         { text: 'Hạn sử dụng', value: 'expiration_date' },

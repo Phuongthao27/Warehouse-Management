@@ -35,7 +35,6 @@
             <th scope="col">Nhà cung cấp</th>
             <th scope="col">Số lượng</th>
             <th scope="col">Đơn giá</th>
-            <th scope="col">Đơn vị</th>
             <th scope="col">Ngày sản xuất</th>
             <th scope="col">Ngày hết hạn</th>
             <th scope="col">Thao tác</th>
@@ -63,13 +62,6 @@
             </td>
             <td><input type="text"  name="NXS" v-model="quantity[n]"></td>
             <td><input type="text"  name="NXS" v-model="price[n]"></td>
-            <td>
-              <select class="form-control" name="product" v-model="unit[n]">
-                <option v-for="item in units" v-bind:key="item.product_id" v-bind:value="item">
-                  {{ item.unit_name }}
-                </option>
-              </select>
-            </td>
             <td><input type="date"  name="NXS" v-model="production_date[n]"></td>
             <td><input type="date"  name="HSD" v-model="expiration_date[n]"></td>
             <td>
@@ -114,8 +106,6 @@ export default {
     supplier:[],
     quantity:[],
     price :[],
-    unit: [],
-    units: [],
     production_date:[],
     expiration_date:[],
     totalProducts:1,
@@ -208,7 +198,6 @@ export default {
           product_name: this.product[i].name,
           suppplier: this.supplier[i].supplier_name,
           price: this.price[i],
-          unit: this.unit[i].unit_name,
           production_date: this.production_date[i],
           expiration_date: this.expiration_date[i],
           total_price: this.price[i] * this.quantity[i],
